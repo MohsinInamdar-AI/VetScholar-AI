@@ -1,0 +1,15 @@
+services:
+  api:
+    build: ./backend
+    working_dir: /app
+    ports: ["127.0.0.1:8000:8000"]
+    volumes:
+      - ./backend/app:/app/app
+      - ./data:/data
+    environment:
+      DATA_DIR: /data
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      OLLAMA_MODEL: llama3.2:3b
+      ALLOWED_ORIGINS: http://localhost:5173
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
